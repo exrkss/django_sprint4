@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Детали публикации</title>
+</head>
+<body>
+    <h1>Блогикум</h1>
+    
+    <div>
+        <ul>
+            <li>Место: {{ post.location }}</li>
+            <li>Дата: {{ post.date }}</li>
+            <li>Категория: {{ post.category }}</li>
+        </ul>
+        <p>{{ post.text|linebreaks }}</p>
+    </div>
+    
+    <footer>
+        <p>© Блогикум</p>
+    </footer>
+</body>
+</html>

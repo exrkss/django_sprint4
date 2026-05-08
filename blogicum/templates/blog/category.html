@@ -1,14 +1,26 @@
 {% extends "base.html" %}
+
 {% block title %}
-  Публикации в категории {{ category.title }}
+  Публикации в категории «{{ category.title }}»
 {% endblock %}
+
 {% block content %}
-  <h1 class="text-center">Публикации в категории - {{ category.title }}</h1>
-  <p class="col-6 offset-3 mb-5 lead text-center">{{ category.description }}</p>
-  {% for post in page_obj %}
-    <article class="mb-5">  
-      {% include "includes/post_card.html" %}
-    </article>   
+  <h1>Публикации в категории «{{ category.title }}»</h1>
+  <p class="mb-5">{{ category.description }}</p>
+  
+  {% for post in posts %}
+    <div class="mb-5">
+      <h2>{{ post.title }}</h2>
+      <p>
+        {{ post.location.name }} | 
+        {{ post.pub_date|date:"d E Y" }} | 
+        <a href="{% url 'blog:category_posts' post.category.slug %}">{{ post.category.title }}</a>
+      </p>
+      <p>{{ post.text|truncatewords:10 }}</p>
+      <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+      {% if not forloop.last %}<hr>{% endif %}
+    </div>
+  {% empty %}
+    <p>В этой категории пока нет публикаций.</p>
   {% endfor %}
-  {% include "includes/paginator.html" %}
 {% endblock %}
