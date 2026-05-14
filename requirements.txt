@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+python-dotenv 
+Pillow 
+Django>=4.2,<5.0
+=======
 asgiref==3.5.2
 attrs==22.2.0
 Django==3.2.16
@@ -25,3 +30,4 @@ tomli==2.0.1
 yapf==0.32.0
 beautifulsoup4==4.11.2
 
+>>>>>>> f6e7262b7196548a845c99d5296d26a16ca37566

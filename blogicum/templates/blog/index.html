@@ -1,12 +1,22 @@
 {% extends "base.html" %}
-{% block title %}
-  Лента записей
-{% endblock %}
+{% block title %}Лента записей{% endblock %}
 {% block content %}
-  {% for post in page_obj %}
-    <article class="mb-5">
-      {% include "includes/post_card.html" %}
-    </article>
-  {% endfor %}
-  {% include "includes/paginator.html" %}
+<h1>Лента записей</h1>
+{% for post in page_obj %}
+<article>
+    <ul>
+        <li>Место: {{ post.location.name|default:"Планета Земля" }}</li>
+        <li>Дата: {{ post.pub_date|date:"d E Y" }}</li>
+        <li>Категория: <a href="{% url 'blog:category_posts' post.category.slug %}">{{ post.category.title }}</a></li>
+    </ul>
+    <h3>{{ post.title }}</h3>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
+    {% endif %}
+    <p>{{ post.text|truncatewords:10 }}</p>
+    <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+    <p>Комментариев: ({{ post.comments.count }})</p>
+</article>
+{% if not forloop.last %}<hr>{% endif %}
+{% endfor %}
 {% endblock %}

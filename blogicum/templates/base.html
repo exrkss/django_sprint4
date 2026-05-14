@@ -1,26 +1,27 @@
 {% load static %}
-{% load django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{% static 'img/fav/favicon.ico' %}" type="image">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/fav/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/fav/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
-    <title>
-      {% block title %}{% endblock %}
-    </title>
-    {% bootstrap_css %}
-  </head>
-  <body>
-    {% include "includes/header.html" %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Блогикум{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'blog:index' %}">Главная</a></li>
+                <li><a href="{% url 'pages:about' %}">О проекте</a></li>
+                <li><a href="{% url 'pages:rules' %}">Правила</a></li>
+            </ul>
+        </nav>
+    </header>
     <main>
-      <div class="container py-5">
-        {% block content %}{% endblock %}
-      </div>
+        {% block content %}
+        {% endblock %}
     </main>
-    {% include "includes/footer.html" %}
-  </body>
+    <footer>
+        <p>© Блогикум</p>
+    </footer>
+</body>
 </html>

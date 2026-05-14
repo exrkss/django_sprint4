@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Удаление поста</h1>
+  
+  <p>Вы уверены, что хотите удалить пост "{{ post.title }}" ?</p>
+  
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a href="{% url 'post_detail' post.id %}" class="btn btn-secondary">Отмена</a>
+  </form>
+
+<style>
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+    }
+</style>
+{% endblock %}

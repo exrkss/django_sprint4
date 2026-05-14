@@ -1,32 +1,20 @@
 from django import forms
-
-from .models import Post, Comment, User
+from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-
     class Meta:
         model = Post
-        fields = (
-            'title',
-            'text',
-            'pub_date',
-            'image',
-            'location',
-            'category',
-            'is_published',
-        )
+        fields = ['title', 'text', 'image', 'pub_date', 'location', 'category', 'is_published']
+        widgets = {
+            'pub_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comment
-        fields = ('text',)
-
-
-class UserForm(forms.ModelForm):
-
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Ваш комментарий...'}),
+        }

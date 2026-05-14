@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Категория: {{ category.title }}</h1>
+  
+  {% for post in page_obj %}
+    {% include "includes/post_card.html" %}
+  {% endfor %}
+  
+  {% include "includes/paginator.html" %}
+{% endblock %}

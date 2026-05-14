@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Удаление комментария</h1>
+  
+  <p>К посту: <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></p>
+  
+  <div class="comment">
+    <p><strong>{{ comment.author.username }}</strong> написал:</p>
+    <p>{{ comment.text|linebreaks }}</p>
+  </div>
+  
+  <p>Вы уверены, что хотите удалить этот комментарий?</p>
+  
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a href="{% url 'post_detail' post.id %}" class="btn btn-secondary">Отмена</a>
+  </form>
+
+<style>
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .comment {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 15px 0;
+    }
+</style>
+{% endblock %}

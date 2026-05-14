@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ post.location.name|default:"Планета Земля" }}. {{ post.pub_date|date:"d E Y" }}{% endblock %}
+{% block content %}
+<article>
+    <ul>
+        <li>Место: {{ post.location.name|default:"Планета Земля" }}</li>
+        <li>Дата: {{ post.pub_date|date:"d E Y" }}</li>
+        <li>Категория: <a href="{% url 'blog:category_posts' post.category.slug %}">{{ post.category.title }}</a></li>
+    </ul>
+    <h3>{{ post.title }}</h3>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" style="max-width: 100%; height: auto;">
+    {% endif %}
+    <p>{{ post.text|linebreaksbr }}</p>
+    {% if user == post.author %}
+        <a href="{% url 'blog:edit_post' post.id %}">Редактировать пост</a>
+        <a href="{% url 'blog:delete_post' post.id %}" onclick="return confirm('Удалить пост?')">Удалить пост</a>
+    {% endif %}
+</article>
+{% include "includes/comments.html" %}
+{% endblock %}
